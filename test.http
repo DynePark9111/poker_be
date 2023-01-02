@@ -18,3 +18,14 @@ Content-Type: {{content-type}}
     "myCards": [ "5S", "TD", "8C","3C", "5D"],
     "toChange": ["5S", "5D"]
 }
+
+### POST /change (with count)
+
+POST {{hostname}}/game/change HTTP/1.1
+Content-Type: {{content-type}}
+
+{
+    "myCards": [ "5S", "TD", "8C","3C", "5D"],
+    "toChange": ["5S", "5D"],
+    "count":5
+}

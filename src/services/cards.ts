@@ -63,13 +63,17 @@ export function changeCards(fiveCards: cards, cardsToChange: cards) {
     return fiveCards;
   }
   let subtracted = arraySubtract(DECK, cardsToChange);
-  let newCards = shuffle(subtracted).slice(0, cardsToChange.length);
-
-  cardsToChange.forEach((card, index) => {
-    fiveCards[fiveCards.indexOf(card)] = newCards[index];
+  let result: cards = [];
+  fiveCards.forEach((card, index) => {
+    let newCards = shuffle(subtracted).slice(0, cardsToChange.length);
+    if (cardsToChange.includes(card)) {
+      result.push(newCards.pop() as string);
+    } else {
+      result.push(card);
+    }
   });
 
-  return fiveCards;
+  return result;
 }
 
 const ORDER = "23456789TJQKA";

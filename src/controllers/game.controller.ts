@@ -15,11 +15,14 @@ const getInitialCards = async (req: Request, res: Response) => {
 
 const postChangeCards = async (req: Request, res: Response) => {
   try {
-    let { myCards, toChange } = req.body;
-    let cards = changeCards(myCards, toChange);
-    let result = getRanks(cards);
-
-    res.send({ cards, result });
+    let { myCards, toChange, count = 1 } = req.body;
+    let results = [];
+    for (let i = 0; i < Number(count); i++) {
+      let cards = changeCards(myCards, toChange);
+      let rank = getRanks(cards);
+      results.push({ cards, rank });
+    }
+    res.send({ results });
   } catch (err) {
     if (err instanceof Error) {
       res.status(409).json({ message: err.message });
