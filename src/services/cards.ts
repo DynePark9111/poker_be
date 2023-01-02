@@ -27,8 +27,8 @@ export function getRanks(cards: cards) {
     (straight && 6) ||
     (duplicates[3] && 7) ||
     (duplicates[2] > 1 && 8) ||
-    (duplicates[2] && 9) ||
-    (jackOrBetter && 10) ||
+    (duplicates[2] && jackOrBetter && 9) ||
+    (duplicates[2] && 10) ||
     11;
   return rank;
 

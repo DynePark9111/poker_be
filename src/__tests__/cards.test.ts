@@ -34,11 +34,11 @@ describe("Services/cards", () => {
     it("Two Pair (8)", () => {
       expect(getRanks(["AS", "AD", "2S", "2D", "3S"])).toBe(8);
     });
-    it("Pair (9)", () => {
-      expect(getRanks(["AS", "AD", "2S", "3D", "4S"])).toBe(9);
+    it("JacksOrBetter(9)", () => {
+      expect(getRanks(["JS", "JD", "2S", "3D", "4S"])).toBe(9);
     });
-    it("JackOrBetter (10)", () => {
-      expect(getRanks(["AS", "3D", "4S", "5D", "6S"])).toBe(10);
+    it("Pair (10)", () => {
+      expect(getRanks(["TS", "TD", "4S", "5D", "6S"])).toBe(10);
     });
     it("High Cards (11)", () => {
       expect(getRanks(["2S", "4D", "5S", "6D", "7S"])).toBe(11);
