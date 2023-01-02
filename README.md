@@ -1,8 +1,8 @@
-# Boilerplate
+# Poker Backend
 
 ## Stack
 
-- A
+- Express (typescript)
 
 ## Get Started
 
@@ -23,3 +23,11 @@ yarn start
 ```
 yarn test
 ```
+
+## API
+
+| Method | URL          | request body(required\*) | Description                    |
+| ------ | ------------ | ------------------------ | ------------------------------ |
+| GET    | /            | -                        | displays port                  |
+| GET    | /game/new    | -                        | start a new game. draw 5 cards |
+| POST   | /game/change | myCards*, toChange*      | change cards                   |
