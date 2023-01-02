@@ -15,7 +15,7 @@ export function getRanks(cards: cards) {
   const lowStraight = values.join("") === "2345A";
   const straight =
     lowStraight || faces.every((f, index) => f.charCodeAt(0) - first === index);
-  const jackOrBetter = /[JQKA]/.test(cards.toString());
+  const jacksOrBetter = /JJ|QQ|KK|AA/.test(values.join("").toString());
   const tenOrBetter = values.join("") === "AJKQT";
 
   let rank =
@@ -27,7 +27,7 @@ export function getRanks(cards: cards) {
     (straight && 6) ||
     (duplicates[3] && 7) ||
     (duplicates[2] > 1 && 8) ||
-    (duplicates[2] && jackOrBetter && 9) ||
+    (duplicates[2] && jacksOrBetter && 9) ||
     (duplicates[2] && 10) ||
     11;
   return rank;
