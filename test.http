@@ -29,3 +29,30 @@ Content-Type: {{content-type}}
     "toChange": ["5S", "5D"],
     "count":5
 }
+
+####### /auth
+### GET /
+GET {{hostname}}/auth HTTP/1.1
+
+### POST /signup
+POST {{hostname}}/auth/signup HTTP/1.1
+Content-Type: {{content-type}}
+
+{
+    "username": "username",
+    "email": "username@gmail.com",
+    "password": "123123123q",
+    "confirmPassword": "123123123q"
+}
+
+### POST /login
+POST {{hostname}}/auth/login HTTP/1.1
+Content-Type: {{content-type}}
+
+{
+    "email": "username@gmail.com",
+    "password": "123123123q"
+}
+
+### GET /
+GET {{hostname}}/auth/logout HTTP/1.1

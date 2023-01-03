@@ -1,19 +1,9 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
-import gameRoutes from "./routes/game.routes";
+import database from "./utils/DI";
+import runServer from "./utils/server";
 
-dotenv.config();
-
-const app: Express = express();
+const app = runServer(database);
 const PORT = process.env.PORT;
-app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Home");
-});
-
-app.use("/game", gameRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+app.listen(PORT, async () => {
+  console.log(`App is running at http://localhost:${PORT}`);
 });

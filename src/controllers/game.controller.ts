@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { changeCards, drawCards, getRanks } from "../services/cards";
 
-const getInitialCards = async (req: Request, res: Response) => {
+export const getInitialCards = async (req: Request, res: Response) => {
   try {
     let cards = drawCards();
     let rank = getRanks(cards);
@@ -13,7 +13,7 @@ const getInitialCards = async (req: Request, res: Response) => {
   }
 };
 
-const postChangeCards = async (req: Request, res: Response) => {
+export const postChangeCards = async (req: Request, res: Response) => {
   try {
     let { myCards, toChange, count = 1 } = req.body;
     let results = [];
@@ -28,9 +28,4 @@ const postChangeCards = async (req: Request, res: Response) => {
       res.status(409).json({ message: err.message });
     }
   }
-};
-
-module.exports = {
-  getInitialCards,
-  postChangeCards,
 };

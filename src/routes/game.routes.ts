@@ -1,9 +1,11 @@
 import { Router } from "express";
+import {
+  getInitialCards,
+  postChangeCards,
+} from "../controllers/game.controller";
 const router = Router();
 
-const gameController = require("../controllers/game.controller");
-
-router.get("/new", gameController.getInitialCards);
-router.post("/change", gameController.postChangeCards);
+router.get("/new", getInitialCards);
+router.post("/change", postChangeCards);
 
 export default router;
