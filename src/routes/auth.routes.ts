@@ -7,10 +7,11 @@ import {
 } from "../controllers/auth.controller";
 const router = Router();
 
-import { getUserCookie } from "../middlewares/auth.middleware";
+import { getUserCookie, reCaptcha } from "../middlewares/auth.middleware";
 
 router.get("/", getUserCookie, checkUser);
 router.post("/signup", createUser);
+// router.post("/signup", reCaptcha, createUser); // TODO : testing
 router.post("/login", loginUser);
 router.get("/logout", logoutUser);
 
