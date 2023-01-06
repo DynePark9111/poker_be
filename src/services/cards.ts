@@ -60,17 +60,16 @@ export function changeCards(fiveCards: cards, cardsToChange: cards) {
   if (cardsToChange.length === 0) {
     return fiveCards;
   }
-  let subtracted = arraySubtract(DECK, cardsToChange);
-  let result: cards = [];
-  fiveCards.forEach((card, index) => {
-    let newCards = shuffle(subtracted).slice(0, cardsToChange.length);
-    if (cardsToChange.includes(card)) {
-      result.push(newCards.pop() as string);
-    } else {
-      result.push(card);
-    }
-  });
+  let shuffled = shuffle(DECK);
+  let set = new Set(shuffled);
+  const updatedSet = new Set([...set].filter((x) => !fiveCards.includes(x)));
 
+  let result: string[] = [];
+  fiveCards.forEach((card, i) => {
+    cardsToChange.includes(card)
+      ? result.push([...updatedSet][i])
+      : result.push(card);
+  });
   return result;
 }
 
@@ -130,10 +129,10 @@ const DECK = [
   "AC",
 ];
 
-function arraySubtract(arr1: string[], arr2: string[]) {
+function arraySubtract(original: string[], subtract: string[]) {
   const result = [];
-  for (const element of arr1) {
-    if (!arr2.includes(element)) {
+  for (const element of original) {
+    if (!subtract.includes(element)) {
       result.push(element);
     }
   }
