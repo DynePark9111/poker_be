@@ -1,3 +1,5 @@
+import { RANK_TYPE } from "../types/types";
+
 type cards = string[];
 
 export function getRanks(cards: cards) {
@@ -16,7 +18,7 @@ export function getRanks(cards: cards) {
   const jacksOrBetter = /JJ|QQ|KK|AA/.test(values.join("").toString());
   const tenOrBetter = values.join("") === "AJKQT";
 
-  let rank =
+  let rank: RANK_TYPE =
     (flush && straight && tenOrBetter && 1) ||
     (flush && straight && 2) ||
     (duplicates[4] && 3) ||
@@ -26,8 +28,8 @@ export function getRanks(cards: cards) {
     (duplicates[3] && 7) ||
     (duplicates[2] > 1 && 8) ||
     (duplicates[2] && jacksOrBetter && 9) ||
-    (duplicates[2] && 10) ||
-    11;
+    // (duplicates[2] && 10) ||
+    10;
   return rank;
 
   function count(c: any, a: any) {

@@ -71,10 +71,10 @@ describe("Services/cards", () => {
       expect(getRanks(["TS", "AD", "TS", "5D", "6S"])).toBe(10);
       expect(getRanks(["TS", "2D", "4S", "5D", "2S"])).toBe(10);
     });
-    it("High Cards (11)", () => {
-      expect(getRanks(["2S", "4D", "5S", "6D", "7S"])).toBe(11);
-      expect(getRanks(["JS", "4D", "5S", "6D", "7S"])).toBe(11);
-      expect(getRanks(["AS", "4D", "5S", "6D", "7S"])).toBe(11);
-    });
+    // it("High Cards (11)", () => {
+    //   expect(getRanks(["2S", "4D", "5S", "6D", "7S"])).toBe(11);
+    //   expect(getRanks(["JS", "4D", "5S", "6D", "7S"])).toBe(11);
+    //   expect(getRanks(["AS", "4D", "5S", "6D", "7S"])).toBe(11);
+    // });
   });
 });
