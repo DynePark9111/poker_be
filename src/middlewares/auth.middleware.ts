@@ -39,10 +39,11 @@ export const getUserCookie = (
 ) => {
   const token = req.cookies.jwt;
   let guest = {
-    _id: "guest",
+    _id: "#GUESTID123",
     username: "guest",
-    email: "guest",
-    coins: 100,
+    email: "guest@email.com",
+    gem: 10000,
+    cash: 0,
   };
   if (token) {
     jwt.verify(

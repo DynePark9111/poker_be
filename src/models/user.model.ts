@@ -8,7 +8,8 @@ export type UserPublic = {
   _id?: Types.ObjectId;
   username: string;
   email: string;
-  coins: number;
+  gem: number;
+  cash: number;
 };
 
 export interface UserType extends UserPublic {
@@ -45,9 +46,13 @@ const UserSchema = new Schema<UserType>({
     minlength: [8, "minimum 8 characters"],
     maxlength: [16, "maximum 16 characters"],
   },
-  coins: {
+  gem: {
     type: Number,
-    default: 100,
+    default: 10000,
+  },
+  cash: {
+    type: Number,
+    default: 0,
   },
   joinedAt: { type: Date, immutable: true, default: () => Date.now() },
   lastLoggedIn: { type: Date, default: () => Date.now() },

@@ -55,7 +55,7 @@ describe("POST /auth/login", () => {
 
 describe("POST /auth/signup", () => {
   describe("Given: valid input", () => {
-    test.skip("respond = 200 status code, return 100 coins, _id, username, email, content-type: json", async () => {
+    test.skip("respond = 200 status code, return 10000 gems, 0 cash, _id, username, email, content-type: json", async () => {
       const response = await request(app).post("/auth/signup").send({
         username: "testUser2",
         email: "changeHere@gmail.com", // change before running the test
@@ -63,7 +63,8 @@ describe("POST /auth/signup", () => {
         confirmPassword: "Jest1234!",
       });
       expect(response.statusCode).toBe(201);
-      expect(response.body.coins).toBe(100);
+      expect(response.body.cash).toBe(0);
+      expect(response.body.gem).toBe(10000);
       expect(response.body._id).toBeDefined();
       expect(response.body.username).toBeDefined();
       expect(response.body.email).toBeDefined();

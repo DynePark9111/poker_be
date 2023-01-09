@@ -2,9 +2,11 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import gameRoutes from "../routes/game.routes";
 import authRoutes from "../routes/auth.routes";
+import userRoutes from "../routes/user.routes";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { database } from "./DI";
+import { getUserCookie } from "../middlewares/auth.middleware";
 
 export default function (database: database) {
   dotenv.config();
@@ -23,6 +25,7 @@ export default function (database: database) {
   app.get("/", (req: Request, res: Response) => {
     res.send("Home");
   });
+  app.use("/user", getUserCookie, userRoutes);
   app.use("/auth", authRoutes);
   app.use("/game", gameRoutes);
 

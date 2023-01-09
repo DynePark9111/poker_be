@@ -13,23 +13,23 @@ const createToken = (id: string) => {
 
 export const createUser = async (req: Request, res: Response) => {
   const { username, email, password, confirmPassword } = req.body;
-  if (password === confirmPassword) {
-    try {
-      const user = await database.postUser(username, email, password);
-      if (user._id) {
-        const token = createToken(user._id.toString());
-        res.cookie("jwt", token, {
-          httpOnly: true,
-          maxAge: dayInSec * 1000,
-        });
-        let { _id, username, email, coins } = user;
-        return res.status(201).json({ _id, username, email, coins });
-      }
-    } catch (error) {
-      return res.status(400).json({ error });
-    }
+  if (password !== confirmPassword) {
+    return res.status(401).send("passwords do not match");
   }
-  return res.status(401).send("passwords do not match");
+  try {
+    const user = await database.postUser(username, email, password);
+    if (user._id) {
+      const token = createToken(user._id.toString());
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        maxAge: dayInSec * 1000,
+      });
+      let { _id, username, email, gem, cash } = user;
+      return res.status(201).json({ _id, username, email, gem, cash });
+    }
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
 };
 
 export const loginUser = async (req: Request, res: Response) => {
@@ -45,7 +45,8 @@ export const loginUser = async (req: Request, res: Response) => {
       _id: user._id,
       username: user.username,
       email: user.email,
-      coins: user.coins,
+      gem: user.gem,
+      cash: user.cash,
     });
   } catch (error) {
     res.status(403).json(error);
@@ -59,8 +60,8 @@ export const logoutUser = (req: Request, res: Response) => {
 
 export const checkUser = (req: Request, res: Response) => {
   try {
-    const { _id, username, email, coins } = res.locals.user;
-    res.status(200).json({ _id, username, email, coins });
+    const { _id, username, email, gem, cash } = res.locals.user;
+    res.status(200).json({ _id, username, email, gem, cash });
   } catch (err) {
     res.status(400).json(err);
   }
