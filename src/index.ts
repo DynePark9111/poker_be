@@ -1,15 +1,9 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import database from "./utils/DI";
+import runServer from "./utils/server";
 
-dotenv.config();
-
-const app: Express = express();
+const app = runServer(database);
 const PORT = process.env.PORT;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Home");
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+app.listen(PORT, async () => {
+  console.log(`poker_be is running on port:${PORT}`);
 });
