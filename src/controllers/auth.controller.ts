@@ -2,6 +2,9 @@ import User from "../models/user.model";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import database from "../utils/DI";
+import { Error } from "mongoose";
+import { MongoError } from "mongodb";
+
 require("dotenv").config();
 
 const dayInSec = 24 * 60 * 60;
@@ -14,7 +17,10 @@ const createToken = (id: string) => {
 export const createUser = async (req: Request, res: Response) => {
   const { username, email, password, confirmPassword } = req.body;
   if (password !== confirmPassword) {
-    return res.status(401).send("passwords do not match");
+    return res.status(400).json({
+      success: false,
+      message: "Passwords do not match!",
+    });
   }
   try {
     const user = await database.postUser(username, email, password);
@@ -28,7 +34,15 @@ export const createUser = async (req: Request, res: Response) => {
       return res.status(201).json({ _id, username, email, gem, cash });
     }
   } catch (error) {
-    return res.status(400).json({ error });
+    if ((error as MongoError).code === 11000) {
+      return res.status(400).json({
+        success: false,
+        message: "Email already exists!",
+      });
+    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -49,7 +63,9 @@ export const loginUser = async (req: Request, res: Response) => {
       cash: user.cash,
     });
   } catch (error) {
-    res.status(403).json(error);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return res.status(400).json({ error: error.message });
   }
 };
 
