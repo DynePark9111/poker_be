@@ -5,5 +5,5 @@ const app = runServer(database);
 const PORT = process.env.PORT;
 
 app.listen(PORT, async () => {
-  console.log(`App is running at http://localhost:${PORT}`);
+  console.log(`poker_be is running on port:${PORT}`);
 });

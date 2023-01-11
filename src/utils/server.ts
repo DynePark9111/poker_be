@@ -12,7 +12,8 @@ export default function (database: database) {
   dotenv.config();
 
   const app: Express = express();
-  const ORIGIN = process.env.ORIGIN || "*";
+  const ORIGIN = process.env.ORIGIN;
+  const PORT = process.env.PORT;
 
   database.connect();
   // Middleware
@@ -23,7 +24,7 @@ export default function (database: database) {
 
   // Routes
   app.get("/", (req: Request, res: Response) => {
-    res.send("Home");
+    res.send(`poker_be is running on port ${PORT}`);
   });
   app.use("/user", getUserCookie, userRoutes);
   app.use("/auth", authRoutes);
