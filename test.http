@@ -1,0 +1,58 @@
+@hostname = http://localhost:8080
+@content-type = application/json
+
+##### /
+GET {{hostname}}
+
+####### /game
+### GET /new
+
+GET {{hostname}}/game/new HTTP/1.1
+
+### POST /change
+
+POST {{hostname}}/game/change HTTP/1.1
+Content-Type: {{content-type}}
+
+{
+    "myCards": [ "5S", "TD", "8C","3C", "5D"],
+    "toChange": ["5S", "5D"]
+}
+
+### POST /change (with count)
+
+POST {{hostname}}/game/change HTTP/1.1
+Content-Type: {{content-type}}
+
+{
+    "myCards": [ "5S", "TD", "8C","3C", "5D"],
+    "toChange": ["5S", "5D"],
+    "count":5
+}
+
+####### /auth
+### GET /
+GET {{hostname}}/auth HTTP/1.1
+
+### POST /signup
+POST {{hostname}}/auth/signup HTTP/1.1
+Content-Type: {{content-type}}
+
+{
+    "username": "username",
+    "email": "username@gmail.com",
+    "password": "123123123q",
+    "confirmPassword": "123123123q"
+}
+
+### POST /login
+POST {{hostname}}/auth/login HTTP/1.1
+Content-Type: {{content-type}}
+
+{
+    "email": "username@gmail.com",
+    "password": "123123123q"
+}
+
+### GET /
+GET {{hostname}}/auth/logout HTTP/1.1
