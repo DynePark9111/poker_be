@@ -9,7 +9,7 @@
 ## Install dependencies
 
 ```
-yarn add
+yarn
 ```
 
 ### Run application
