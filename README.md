@@ -35,3 +35,5 @@ yarn test
 | POST   | /auth/signup | username*, email*, password*, confirmPassword* | user signup                    |
 | POST   | /auth/login  | email*, password*                              | user login                     |
 | GET    | /auth/logout | -                                              | user logout(delete cookie)     |
+| PATCH  | /user/gem    | gem, \_id                                      | user gem patch                 |
+| PATCH  | /user/cash   | cash, \_id                                     | user cash patch                |
